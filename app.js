@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const login = require('./src/Api/Login/login');
+const Login = require('./src/Api/Login/login');
 
 
 const app = express();
@@ -13,8 +13,13 @@ app.use(bodyParser.json());
 
 
 //this is api call
-app.post('/login', login.Login);
-app.post('/refresh-token', login.RefreshToken);
+const login = new Login(app);
+login.userSignIn();
+login.userRefreshToken();
+
+
+// app.post('/login', login.Login);
+// app.post('/refresh-token', login.RefreshToken);
 
 
 // this is the server
